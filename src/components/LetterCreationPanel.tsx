@@ -81,8 +81,8 @@ export default function LetterCreationPanel({ onSave }: LetterCreationPanelProps
   const [year, setYear] = useState('')
   const [error, setError] = useState('')
   const [pickMode, setPickMode] = useState<'date' | 'time'>('date')
-  const [hours, setHours] = useState('')
-  const [minutes, setMinutes] = useState('')
+  const [hours, setHours] = useState('0')
+  const [minutes, setMinutes] = useState('1')
 
   const currentYear = new Date().getFullYear()
   const years = useMemo(() => Array.from({ length: 11 }, (_, i) => currentYear + i), [currentYear])
@@ -226,7 +226,7 @@ export default function LetterCreationPanel({ onSave }: LetterCreationPanelProps
           <div className="flex rounded-lg overflow-hidden border border-border mb-3">
             <button
               type="button"
-              onClick={() => { setPickMode('date'); setHours(''); setMinutes('') }}
+              onClick={() => { setPickMode('date'); setHours('0'); setMinutes('1') }}
               className={`flex-1 py-2 text-xs font-medium tracking-wide transition-colors ${
                 pickMode === 'date'
                   ? 'bg-accent text-[#F7F4EF]'
@@ -259,10 +259,16 @@ export default function LetterCreationPanel({ onSave }: LetterCreationPanelProps
                 <WheelColumn options={yearOptions} value={year} onChange={handleYearChange} />
               </div>
             ) : (
-              <div className="flex">
-                <WheelColumn options={hourOptions} value={hours} onChange={setHours} />
-                <div className="w-px bg-border shrink-0" />
-                <WheelColumn options={minuteOptions} value={minutes} onChange={setMinutes} />
+              <div className="flex items-end gap-1">
+                <div className="flex-1">
+                  <div className="text-xs text-text-secondary/50 text-center mb-1 font-medium tracking-wide">Hrs</div>
+                  <WheelColumn options={hourOptions} value={hours} onChange={setHours} />
+                </div>
+                <div className="w-px bg-border shrink-0 mb-[18px]" />
+                <div className="flex-1">
+                  <div className="text-xs text-text-secondary/50 text-center mb-1 font-medium tracking-wide">Mins</div>
+                  <WheelColumn options={minuteOptions} value={minutes} onChange={setMinutes} />
+                </div>
               </div>
             )}
           </div>
@@ -309,7 +315,7 @@ export default function LetterCreationPanel({ onSave }: LetterCreationPanelProps
                   onChange={(e) => setHours(e.target.value)}
                   className="flex-1 min-w-0 px-2 py-3 text-sm text-accent bg-transparent border-r border-border appearance-none text-center focus:outline-none focus:bg-accent/5 transition-colors cursor-pointer"
                 >
-                  <option value="" disabled>Hours</option>
+                  <option value="" disabled>Hrs</option>
                   {hourOptions.map(o => (
                     <option key={o.value} value={o.value}>{o.label}</option>
                   ))}
@@ -319,7 +325,7 @@ export default function LetterCreationPanel({ onSave }: LetterCreationPanelProps
                   onChange={(e) => setMinutes(e.target.value)}
                   className="flex-1 min-w-0 px-2 py-3 text-sm text-accent bg-transparent appearance-none text-center focus:outline-none focus:bg-accent/5 transition-colors cursor-pointer"
                 >
-                  <option value="" disabled>Minutes</option>
+                  <option value="" disabled>Mins</option>
                   {minuteOptions.map(o => (
                     <option key={o.value} value={o.value}>{o.label}</option>
                   ))}
