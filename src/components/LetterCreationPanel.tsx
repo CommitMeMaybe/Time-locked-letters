@@ -27,7 +27,7 @@ function WheelColumn({
   onChange: (v: string) => void
 }) {
   const listRef = useRef<HTMLDivElement>(null)
-  const timerRef = useRef<ReturnType<typeof setTimeout>>()
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined)
   const ITEM_H = 36
   const VISIBLE = 5
   const CONTAINER_H = VISIBLE * ITEM_H

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { animate, createDrawable, stagger, JSAnimation, createDraggable, createSpring, morphTo } from 'animejs'
+import { animate, createDrawable, stagger, JSAnimation, createSpring, morphTo } from 'animejs'
 
 function useScrollProgress(ref: React.RefObject<HTMLDivElement | null>): number {
   const [progress, setProgress] = useState(0)
